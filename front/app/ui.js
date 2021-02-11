@@ -172,7 +172,7 @@ const UI = {
         UI.initSetting('shared', true);
         UI.initSetting('view_only', false);
         UI.initSetting('show_dot', false);
-        UI.initSetting('path', 'websockify');
+        UI.initSetting('path', window.location.href.substring(window.location.origin.length + 1));
         UI.initSetting('repeaterID', '');
         UI.initSetting('reconnect', false);
         UI.initSetting('reconnect_delay', 5000);
@@ -1698,7 +1698,7 @@ const UI = {
 const LINGUAS = ["cs", "de", "el", "es", "ja", "ko", "nl", "pl", "ru", "sv", "tr", "zh_CN", "zh_TW"];
 l10n.setup(LINGUAS);
 if (l10n.language === "en" || l10n.dictionary !== undefined) {
-    UI.prime();
+    UI.prime().then(() => {console.log('Connect!'); UI.connect();});
 } else {
     fetch('app/locale/' + l10n.language + '.json')
         .then((response) => {
