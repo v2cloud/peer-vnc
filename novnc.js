@@ -37,7 +37,7 @@ var webServer = module.exports.webServer = function(options) {
     // basic-auth middleware
     if (auth) {
         var basic = httpauth.basic({
-            realm: "51dese.com"
+            realm: "vnctest.v2cloud.com"
         }, function (username, password, callback) {
             callback(username === auth.username && password === auth.password);
         });
