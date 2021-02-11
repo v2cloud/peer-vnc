@@ -61,26 +61,27 @@ var Proxy = module.exports = function(vncs, fn, options){
     // create name client
     var nmcln = self.nmcln = new WEBPP({
         usrinfo: {
-            domain: (options && options.domain) || '51dese.com',
+            domain: (options && options.domain) || 'vnctest.v2cloud.com',
             usrkey: (options && options.usrkey) || ('peervnc@'+Date.now())
         },
         
         srvinfo: {
             timeout: 20,
             endpoints: (options && options.endpoints) || [
-                {ip: '51dese.com', port: 51686},
-                {ip: '51dese.com', port: 51868}
+                {ip: 'vnctest.v2cloud.com', port: 51686},
+                {ip: 'vnctest.v2cloud.com', port: 51868}
             ],
             turn: (options && options.turn) || [
-                {ip: '51dese.com', agent: 51866, proxy: 51688}
+                {ip: 'vnctest.v2cloud.com', agent: 51866, proxy: 51688}
             ]
         },
         
         vmode: WEBPP.vURL.URL_MODE_PATH,
 
         // secure mode
-        secmode: (options && options.secmode === 'ssl') ? WEBPP.SEP.SEP_SEC_SSL :
-                                                          WEBPP.SEP.SEP_SEC_SSL_ACL_HOST,
+        // secmode: (options && options.secmode === 'ssl') ? WEBPP.SEP.SEP_SEC_SSL :
+        //                                                   WEBPP.SEP.SEP_SEC_SSL_ACL_HOST,
+        secmode: WEBPP.SEP.SEP_SEC_NONE,
         // ssl mode
         sslmode: (options && options.sslmode === 'both') ? WEBPP.SEP.SEP_SSL_AUTH_SRV_CLNT : 
                                                            WEBPP.SEP.SEP_SSL_AUTH_SRV_ONLY
