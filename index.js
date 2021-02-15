@@ -1,7 +1,7 @@
 // noVNC proxy implementation with AppNet.io
 // Copyright (c) 2013-present Tom Zhou<appnet.link@gmail.com>
 
-var WEBPP           = require('appnet.io'),
+var WEBPP           = require('appnet.link'),
     noVNC           = require('./novnc'),
     http            = require('http'),
     https           = require('https'),
@@ -15,7 +15,7 @@ var WEBPP           = require('appnet.io'),
 // Debug level
 // 1: display error, proxy entry
 // 2: display vnc rfb info
-var Debug = 0;
+var DebugVNC = 0;
 
 // Proxy class
 // a proxy will contain one appnet.io name-client
@@ -90,7 +90,7 @@ var Proxy = module.exports = function(vncs, fn, options){
     // 2.1
     // check ready
     nmcln.once('ready', function(){
-        if (Debug) console.log('name-client ready on vURL:'+nmcln.vurl);
+        if (DebugVNC) console.log('name-client ready on vURL:'+nmcln.vurl);
         
         // 3.
         // setup noVNC proxy
@@ -143,10 +143,10 @@ var Proxy = module.exports = function(vncs, fn, options){
                 return;
             }
             
-            if (Debug) console.log('http tunnel proxy, connect to self %s:%d for %s', nmcln.ipaddr, nmcln.port, req.url);
+            if (DebugVNC) console.log('http tunnel proxy, connect to self %s:%d for %s', nmcln.ipaddr, nmcln.port, req.url);
             
             var srvSocket = UDT.connect(roptions, function() {
-                if (Debug) console.log('http tunnel proxy, got connected!');   
+                if (DebugVNC) console.log('http tunnel proxy, got connected!');   
                 
                 ///srvSocket.write(head);
                 socket.pipe(srvSocket);
